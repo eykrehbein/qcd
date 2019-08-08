@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/eykrehbein/quickmove/src/utils"
+	"github.com/eykrehbein/quickcd/src/utils"
 )
 
 func main() {
