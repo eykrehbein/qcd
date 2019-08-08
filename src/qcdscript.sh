@@ -6,7 +6,7 @@ then
   then
     qcdhelper $@
   else
-    TARGET=$(qcdhelper get $1)
+    TARGET=$(qcdhelper get $1 $PWD)
     if [ $TARGET != 'UNDEFINED' ]
     then
       cd $TARGET

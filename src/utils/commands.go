@@ -42,8 +42,9 @@ COMMANDS:
 		fmt.Println("Version " + version)
 		break
 	case "get":
-		if len(args) == 3 {
+		if len(args) == 4 {
 			name := args[2]
+			currentDir := args[3]
 
 			qls, err := GetQLs()
 			if err != nil {
@@ -52,6 +53,13 @@ COMMANDS:
 
 			for _, ql := range qls {
 				if ql.Name == name {
+
+					// store the current directory as "back" QuickLink
+					err := AddQL(QuickLink{Name: "back", Path: currentDir})
+					if err != nil {
+						return err
+					}
+					// print the path. The bash script will change directories afterwards
 					fmt.Printf("%s", ql.Path)
 					return nil
 				}
@@ -101,6 +109,10 @@ COMMANDS:
 		var data [][]string
 
 		for _, ql := range qls {
+			// ignore the "back" link because it's automatically generated
+			if ql.Name == "back" {
+				continue
+			}
 			data = append(data, []string{ql.Name, ql.Path})
 		}
 

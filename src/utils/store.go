@@ -55,18 +55,31 @@ func AddQL(ql QuickLink) error {
 		return err
 	}
 
+	backExists := false
 	// check if link name or path already exists
-	for _, link := range alreadyInStore.Links {
+	for i, link := range alreadyInStore.Links {
+		// only allow ql "back" to be updated
+		if ql.Name == "back" && link.Name == ql.Name {
+			alreadyInStore.Links[i] = ql
+			backExists = true
+			break
+		}
 		if link.Name == ql.Name {
 			return errors.New("A quicklink with the name '" + link.Name + "' already exists")
 		}
-		if link.Path == ql.Path {
+		if link.Path == ql.Path && ql.Name != "back" {
 			return errors.New("A quicklink with the path " + link.Path + " already exists (it's called '" + link.Name + "')")
 		}
 	}
 
 	// append the new ql to the existing array of qls
-	newStore.Links = append(alreadyInStore.Links, ql)
+
+	// only append if it's not "back" or if it is "back" but back doesn't exist yet
+	if backExists == false {
+		newStore.Links = append(alreadyInStore.Links, ql)
+	} else {
+		newStore.Links = alreadyInStore.Links
+	}
 
 	err = writeStore(newStore.Links)
 	if err != nil {
