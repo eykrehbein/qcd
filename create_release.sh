@@ -40,3 +40,13 @@ cp build_dev.sh releases/linux_amd64
 rm releases/src_darwin_amd64
 rm releases/src_linux_386
 rm releases/src_linux_amd64
+
+cd releases
+
+zip -r qcd_darwin_MAC_OS.zip darwin
+zip -r qcd_linux_386.zip linux_386
+zip -r qcd_linux_amd64.zip linux_amd64
+
+rm -rf darwin
+rm -rf linux_386
+rm -rf linux_amd64
