@@ -1,8 +1,8 @@
 #!/bin/sh
 
-cp bin/qmscript /usr/local/bin
-cp bin/qmhelper /usr/local/bin
+cp bin/qcdscript /usr/local/bin
+cp bin/qcdhelper /usr/local/bin
 
-chmod +x /usr/local/bin/qmscript
+chmod +x /usr/local/bin/qcdscript
 
-printf "\nalias qm='source /usr/local/bin/qmscript'" >> ~/.bash_profile
+printf "\nalias qcd='source /usr/local/bin/qcdscript'" >> ~/.bash_profile
