@@ -67,7 +67,7 @@ func AddQL(ql QuickLink) error {
 		if link.Name == ql.Name {
 			return errors.New("A quicklink with the name '" + link.Name + "' already exists")
 		}
-		if link.Path == ql.Path && ql.Name != "back" {
+		if link.Path == ql.Path && ql.Name != "back" && link.Name != "back" {
 			return errors.New("A quicklink with the path " + link.Path + " already exists (it's called '" + link.Name + "')")
 		}
 	}
