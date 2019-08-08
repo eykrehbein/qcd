@@ -98,7 +98,7 @@ COMMANDS:
 	case "list":
 		qls, err := GetQLs()
 		if err != nil {
-			return err
+			return errors.New("Couldn't read the store file. Try to create a new QuickLink: qcd add <name> <path>")
 		}
 		if len(qls) == 0 {
 			fmt.Println("There are no quicklinks yet")
