@@ -25,11 +25,11 @@ func userHomePath() string {
 }
 
 func configDirPath() string {
-	return userHomePath() + "/.qmconfig"
+	return userHomePath() + "/.qcdconfig"
 }
 
 func storePath() string {
-	return userHomePath() + "/.qmconfig/store.json"
+	return userHomePath() + "/.qcdconfig/store.json"
 }
 
 // AddQL Add quicklink to the store
