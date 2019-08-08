@@ -11,15 +11,35 @@ import (
 
 // Commander Function that handles incoming CLI commands
 func Commander(args []string) error {
-	if len(args) == 1 {
-		//TODO
-		fmt.Println("// Show Help")
-		return nil
-	}
+
+	version := "1.0"
 
 	switch args[1] {
+	case "help":
+		fallthrough
 	case "h":
-		fmt.Println("Show some help")
+		fmt.Println(`
+NAME:
+  quickcd - Change directories using shortcuts
+
+TO CHANGE DIRECTORY USE:
+  qcd <shortcut-name>
+
+VERSION:
+  ` + version + `
+	
+COMMANDS:
+  add <name> <rel_or_abs_path> 	Add a shortcut
+  remove|rm <name>		Remove a shortcut
+  list			Shows a list of all available shortcuts
+
+  help, h		Shows a list of commands or help for one command
+  version		Shows the version of this program
+`)
+		break
+
+	case "version":
+		fmt.Println("Version " + version)
 		break
 	case "get":
 		if len(args) == 3 {
@@ -39,7 +59,7 @@ func Commander(args []string) error {
 
 			fmt.Printf("%s", "UNDEFINED")
 		} else {
-			fmt.Println("Invalid arguments. Use: qm <name>")
+			fmt.Println("Invalid arguments. Use: qcd <name>")
 		}
 		break
 	// ADD COMMAND
@@ -62,7 +82,7 @@ func Commander(args []string) error {
 			fmt.Println("Successfully added QuickLink '" + name + "'")
 		} else {
 			fmt.Println(args)
-			fmt.Println("Invalid arguments. Use: qm add <name> <path>")
+			fmt.Println("Invalid arguments. Use: qcd add <name> <path>")
 			fmt.Println("Name must only be one word")
 		}
 		break
@@ -74,7 +94,7 @@ func Commander(args []string) error {
 		}
 		if len(qls) == 0 {
 			fmt.Println("There are no quicklinks yet")
-			fmt.Println("Use: qm add <name> <path>")
+			fmt.Println("Use: qcd add <name> <path>")
 			return nil
 		}
 
@@ -105,7 +125,7 @@ func Commander(args []string) error {
 			}
 			fmt.Println("Successfully removed QuickLink '" + name + "'")
 		} else {
-			fmt.Println("Invalid arguments. Use: qm remove|rm <name>")
+			fmt.Println("Invalid arguments. Use: qcd remove|rm <name>")
 			fmt.Println("Name must only be one word")
 		}
 		break
